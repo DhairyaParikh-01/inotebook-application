@@ -3,11 +3,12 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-
+const fetchuser = require('../Middleware/fetchuser');
 
 const JWT_SECRET = 'Mynameis@nthony';
 
-router.get('/', async (req,res) => {
+// ROUTE-1 :Register a user using POST "/api/auth/register"
+router.post('/register', async (req,res) => {
     try
     {
         console.log(req.body); 
@@ -37,6 +38,45 @@ router.get('/', async (req,res) => {
     catch(error){
         console.error(error.message);
         res.status(500).send("Some Error Occured");
+    }
+});
+
+// ROUTE-2:  Authenticate a user using POST  "/api/auth/login" 
+router.post('/login', async (req,res) =>{
+    const {email, password} = req.body;
+    try {
+        let user = await User.findOne({email});
+        if(!user){
+            return res.status(400).json({error: "Invalid credentials"});
+        }
+        const passwordCompare = await bcrypt.compare(password, user.password);
+        if(!passwordCompare){
+            return res.status(400).json({error: "Invalid credentials"});
+        }
+        const data = {
+            user:{
+                id: user.id
+            }
+        }
+        const jwtToken = jwt.sign(data, JWT_SECRET);
+        res.send(jwtToken);
+
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).send("Internal server error");
+    }
+});
+
+// ROUTE-3: Get a user details using POST "/api/auth/getuser"
+
+router.post('/getuser', fetchuser,  async (req,res) => {
+    try {
+        userId = req.user.id;
+        const user = await User.findById(userId).select("-password")
+        res.send(user);
+    } catch (error) {
+        console.error(error.message);
+        res.status(400).send("Internal server error");
     }
 })
 
