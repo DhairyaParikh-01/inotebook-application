@@ -7,7 +7,7 @@ const fetchuser = require('../Middleware/fetchuser');
 
 const JWT_SECRET = 'Mynameis@nthony';
 
-// ROUTE-1 :Register a user using POST "/api/auth/register"
+// ROUTE-1 :Register a user using POST "/api/auth/register". No login required
 router.post('/register', async (req,res) => {
     try
     {
@@ -41,7 +41,7 @@ router.post('/register', async (req,res) => {
     }
 });
 
-// ROUTE-2:  Authenticate a user using POST  "/api/auth/login" 
+// ROUTE-2:  Authenticate a user using POST  "/api/auth/login". No login required
 router.post('/login', async (req,res) =>{
     const {email, password} = req.body;
     try {
@@ -67,7 +67,7 @@ router.post('/login', async (req,res) =>{
     }
 });
 
-// ROUTE-3: Get a user details using POST "/api/auth/getuser"
+// ROUTE-3: Get a user details using POST "/api/auth/getuser". Login required
 
 router.post('/getuser', fetchuser,  async (req,res) => {
     try {
