@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const About = () => {
+const About = () => {
     return (
         <div>
-            This is About 
+            This is About page.
         </div>
     )
 }

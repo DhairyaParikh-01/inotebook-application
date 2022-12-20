@@ -14,5 +14,5 @@ app.use('/api/notes', require('./Routes/notes'));
 // })
 
 app.listen(port, () => {
-  console.log(`App is running on http://localhost:${port}`);
+  console.log(`inotebook backend application is started. Access here: http://localhost:${port}`);
 })
