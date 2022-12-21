@@ -9,13 +9,15 @@ const JWT_SECRET = 'Mynameis@nthony';
 
 // ROUTE-1 :Register a user using POST "/api/auth/register". No login required
 router.post('/register', async (req,res) => {
+    let success = false;
     try
     {
         console.log(req.body); 
         // const user = User(req.body);
         let user  = await User.findOne({email: req.body.email});
         if(user){
-            return res.status(400).json({error: "Sorry, a user with this email already exists"})
+            success = false;
+            return res.status(400).json({sucess, error: "Sorry, a user with this email already exists"})
         }
         const salt = await bcrypt.genSalt(10);
         const secPassword = await bcrypt.hash(req.body.password, salt);
@@ -32,26 +34,30 @@ router.post('/register', async (req,res) => {
         const jwtToken = jwt.sign(data, JWT_SECRET);
         console.log(jwtToken);
         user.save();
-
-        res.send(jwtToken);
+        success = true;
+        res.json({success, jwtToken});
     }
     catch(error){
         console.error(error.message);
+        success = false;
         res.status(500).send("Some Error Occured");
     }
 });
 
 // ROUTE-2:  Authenticate a user using POST  "/api/auth/login". No login required
 router.post('/login', async (req,res) =>{
+    let success = false;
     const {email, password} = req.body;
     try {
         let user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({error: "Invalid credentials"});
+            success = false;
+            return res.status(400).json({success, error: "Invalid credentials"});
         }
         const passwordCompare = await bcrypt.compare(password, user.password);
         if(!passwordCompare){
-            return res.status(400).json({error: "Invalid credentials"});
+            success = false;
+            return res.status(400).json({success, error: "Invalid credentials"});
         }
         const data = {
             user:{
@@ -59,7 +65,8 @@ router.post('/login', async (req,res) =>{
             }
         }
         const jwtToken = jwt.sign(data, JWT_SECRET);
-        res.send(jwtToken);
+        success = true;
+        res.json({success ,jwtToken});
 
     } catch (error) {
         console.error(error.message);

@@ -1,3 +1,0 @@
-1.) Adding API calls in NoteState to Create, Fetch & Delete Notes and save the changes permanently in the database.
-2.) Adding modal(in Notes.js) to edit a note with a given id and updating a note.
-3.) Updating note and saving changes permanently in database(Monodb).
