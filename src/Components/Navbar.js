@@ -7,6 +7,7 @@ const Navbar = () => {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <img src="https://download.logo.wine/logo/Microsoft_OneNote/Microsoft_OneNote-Logo.wine.png" style={{height: "30px", width: "50px"}} alt="logo" />
                 <Link className="navbar-brand" to="/">inotebook</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

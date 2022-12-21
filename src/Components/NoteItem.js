@@ -2,7 +2,7 @@ import { React, useContext } from 'react'
 import NoteContext from '../Context/notes/NoteContext';
 
 const NoteItem = (props) => {
-    const { note } = props;
+    const { note, updateNote } = props;
     const { deleteNote } = useContext(NoteContext);
     return (
         <div className="col-md-3">
@@ -10,7 +10,7 @@ const NoteItem = (props) => {
                     <div className="dropdown my-2" style={{float: "right"}}>
                         <button className="btn btn-dark mx-2" type="button" data-toggle="dropdown" aria-expanded="false"><i className="fa-solid fa-ellipsis-vertical"></i></button>
                         <div className="dropdown-menu">
-                            <a className="dropdown-item " href="/"><i className="fa-regular fa-pen-to-square mx-2"></i>Edit</a>
+                            <a className="dropdown-item " href="/" onClick={(e) => {e.preventDefault(); updateNote(note)}}><i className="fa-regular fa-pen-to-square mx-2"></i>Edit</a>
                             <a className="dropdown-item " href="/" onClick={(e)=>{e.preventDefault(); deleteNote(note._id)}} ><i className="fa-solid fa-trash-can mx-2" ></i>Delete</a>
                         </div>
                     </div>
