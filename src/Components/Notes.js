@@ -2,6 +2,7 @@ import { React, useContext, useEffect, useRef, useState } from 'react'
 import NoteContext from '../Context/notes/NoteContext';
 import NoteItem from './NoteItem';
 import Addnote from "./Addnote";
+import { useHistory } from 'react-router-dom';
 
 const Notes = (props) => {
 
@@ -9,8 +10,14 @@ const Notes = (props) => {
     const [note, setNote] = useState({etitle: "", edescription: "", etag: ""});
     const ref = useRef(null)
     const refClose = useRef(null)
+    let history = useHistory();
     useEffect(() => {
-        getNotes()
+        if(localStorage.getItem('token')){
+            getNotes()
+        }
+        else{
+            history.push('/login');
+        }
     }, [])
     const updateNote = (currentnote) => {
         setNote({eid: currentnote._id, etitle: currentnote.title, edescription: currentnote.description, etag: currentnote.tag});
@@ -33,7 +40,7 @@ const Notes = (props) => {
                 Launch demo modal
             </button>
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog" >
+                <div className="modal-dialog modal-dialog-centered" >
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="exampleModalLabel">Edit note</h5>
