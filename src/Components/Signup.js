@@ -1,7 +1,7 @@
 import {React, useState} from 'react'
 import { useHistory } from "react-router-dom";
 
-const Signup = () => {
+const Signup = (props) => {
     let history = useHistory();
     const [credentials, setCredentials] = useState({name: "", email: "", password: "", cpassword: ""});
     const handleOnSubmit =  async (e) => {
@@ -24,14 +24,16 @@ const Signup = () => {
             if(json.success){
                 // Save auth token and redirect to the home page as a new user.
                 localStorage.setItem('token', json.jwtToken);
+                props.showAlert("Logged in suv=ccessfully", "success");
                 history.push('/');
             }
             else{
-                alert("User with this email is already registered!");
+                props.showAlert("User already exits!", "danger");
             }
         }
         else{
-            alert("passwords not matching");
+            // alert("passwords not matching");
+            props.showAlert("Passwords not matching!", "danger");
         }
     }
     const onChange = (e) => {

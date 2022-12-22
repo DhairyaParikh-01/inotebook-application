@@ -11,7 +11,7 @@ const NoteItem = (props) => {
                         <button className="btn btn-dark mx-2" type="button" data-toggle="dropdown" aria-expanded="false"><i className="fa-solid fa-ellipsis-vertical"></i></button>
                         <div className="dropdown-menu">
                             <a className="dropdown-item " href="/" onClick={(e) => {e.preventDefault(); updateNote(note)}}><i className="fa-regular fa-pen-to-square mx-2"></i>Edit</a>
-                            <a className="dropdown-item " href="/" onClick={(e)=>{e.preventDefault(); deleteNote(note._id)}} ><i className="fa-solid fa-trash-can mx-2" ></i>Delete</a>
+                            <a className="dropdown-item " href="/" onClick={(e)=>{e.preventDefault(); deleteNote(note._id); props.showAlert("Note Deleted successfully", "success")}} ><i className="fa-solid fa-trash-can mx-2" ></i>Delete</a>
                         </div>
                     </div>
                 <div className="card-body">

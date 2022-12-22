@@ -2,7 +2,7 @@ import { useState } from "react";
 import React from 'react'
 import { useHistory } from "react-router-dom";
 
-const Login = () => {
+const Login = (props) => {
     const [credentials, setCredentials] = useState({email: "", password: ""});
     let history = useHistory();
 
@@ -23,10 +23,12 @@ const Login = () => {
         if(json.success){
             // Save he JWTtoken and redirect to home component
             localStorage.setItem('token', json.jwtToken);
+            props.showAlert("Logged in successfully", "success");
             history.push('/');
         }
         else{
-            alert("Invalid credentials");
+            // alert("Invalid credentials");
+            props.showAlert("Invalid Credetails", "danger");
         }
         setCredentials({email: "", password: ""});
     }
