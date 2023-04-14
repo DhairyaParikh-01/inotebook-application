@@ -1,3 +1,4 @@
+require("dotenv").config();
 const jwt = require('jsonwebtoken');
 
 const fetchuser = ((req,res,next) => {
@@ -7,7 +8,7 @@ const fetchuser = ((req,res,next) => {
         res.status(401).send({error: "Please pass token in header"});
     }
     try {
-        const data = jwt.verify(token, process.env.JWT_SECERET_KEY);
+        const data = jwt.verify(token, process.env.JWT_SECRET);
         req.user = data.user;
         next();        
     } catch (error) {

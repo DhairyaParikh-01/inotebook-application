@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
@@ -5,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
 
-const JWT_SECRET = process.env.JWT_SECERET_KEY;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // ROUTE-1 :Register a user using POST "/api/auth/register". No login required
 router.post('/register', async (req,res) => {
@@ -17,7 +18,7 @@ router.post('/register', async (req,res) => {
         let user  = await User.findOne({email: req.body.email});
         if(user){
             success = false;
-            return res.status(400).json({sucess, error: "Sorry, a user with this email already exists"})
+            return res.status(400).json({success, error: "Sorry, a user with this email already exists"})
         }
         const salt = await bcrypt.genSalt(10);
         const secPassword = await bcrypt.hash(req.body.password, salt);
