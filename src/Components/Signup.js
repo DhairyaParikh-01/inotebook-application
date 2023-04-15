@@ -24,7 +24,7 @@ const Signup = (props) => {
             if(json.success){
                 // Save auth token and redirect to the home page as a new user.
                 localStorage.setItem('token', json.jwtToken);
-                props.showAlert("Logged in suv=ccessfully", "success");
+                props.showAlert("Logged in successfully", "success");
                 history.push('/');
             }
             else{
