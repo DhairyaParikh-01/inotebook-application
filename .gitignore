@@ -27,3 +27,5 @@ yarn-error.log*
 Backend/node_modules
 Backend/commits.txt
 
+#commits file
+commits.txt
