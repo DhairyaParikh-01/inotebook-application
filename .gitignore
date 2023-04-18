@@ -26,6 +26,7 @@ yarn-error.log*
 #Express backend
 Backend/node_modules
 Backend/commits.txt
+Backend/.env
 
 #commits file
 commits.txt
