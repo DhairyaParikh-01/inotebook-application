@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const fetchuser = require('../Middleware/fetchuser');
-const Notes = require('../Models/Notes');
+const fetchuser = require('../middleware/fetchuser');
+const Notes = require('../models/Notes');
 
 // ROUTE-1: Get all the notes using GET "api/notes/getnotes". Login required
 router.get('/fetchallnotes', fetchuser, async  (req,res) => {
