@@ -7,9 +7,9 @@ const cors = require('cors');
 connect_to_mongo();
 app.use(cors());
 app.use(express.json());
-// Available Routes: 
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/notes', require('./routes/notes'));
+// Available api: 
+app.use('/api/auth', require('./api/auth'));
+app.use('/api/notes', require('./api/notes'));
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!')
