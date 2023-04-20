@@ -5,8 +5,15 @@ const User = require('../Models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchuser = require('../Middleware/fetchuser');
+const { route } = require("../Routes/notes");
 
 const JWT_SECRET = process.env.JWT_SECRET;
+
+
+//ROUTE-0 : To check vercel running or not
+route.get('/authtest', (req,res) => {
+    res.send("success!!");
+})
 
 // ROUTE-1 :Register a user using POST "/api/auth/register". No login required
 router.post('/register', async (req,res) => {
