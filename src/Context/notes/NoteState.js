@@ -2,7 +2,7 @@ import { useState } from 'react';
 import NoteContext from './NoteContext';
 
 const NoteState = (props) => {
-  const host = 'http://localhost:5000';
+  const host = 'https://inotebook-application.vercel.app';
   
   const getNotes = async () => {
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
